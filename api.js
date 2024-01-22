@@ -464,6 +464,14 @@ router.get('/news/tixid', async (req, res, next) => {
 	result: data.result
 	})
 })
+router.get('/news/newsinfo', async (req, res, next) => {
+	let data = await fetchJson(`https://api.lolhuman.xyz/api/newsinfo?apikey=gatadios`)
+	res.json({
+	status: true,
+	author: `${author}`,
+	result: data.result
+	})
+})
 //-----------------------------------------------------------------
 
 // Maker
