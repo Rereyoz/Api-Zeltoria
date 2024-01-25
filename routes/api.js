@@ -26,25 +26,25 @@ attp } = require('../lib/scrape');
 // Lib
 var { fetchJson, getBuffer } = require('../lib/myfunc');
 // Settings
-const author = "Zeltoria"
+const author = "Reyy"
 
 // Mess err
 mess = {
     error: {
         status: false,
         message: 'Error, Service Unavaible',
-        maintanied_by: 'Zeltoria'
+        maintanied_by: 'Reyy'
     },
     noturl: {
     	status: false,
     	message: 'Error, Invalid Url',
-    	maintanied_by: 'Zeltoria'
+    	maintanied_by: 'Reyy'
     },
     notquery: {
     	status: false,
     	code: 403,
     	message: 'Error, Invalid Query',
-    	maintanied_by: 'Zeltoria'
+    	maintanied_by: 'Reyy'
     }
 }
 // Features
@@ -227,7 +227,7 @@ router.get('/download/play', async (req, res, next) => {
 router.get('/download/ytmp3', async (req, res, next) => {
 	var url = req.query.url
 	if (!url) return res.json(mess.noturl)
-	let data = await api.downloader.yt.mp3(url)
+	let data = await fetchJson(`https://api.lolhuman.xyz/api/ytaudio2?apikey=GataDios&url=${url}`)
 	res.json({
 	status: true,
 	author: `${author}`,
@@ -458,6 +458,14 @@ router.get('/news/rumahkeadilan', async (req, res, next) => {
 })
 router.get('/news/tixid', async (req, res, next) => {
 	let data = await news.TixID();
+	res.json({
+	status: true,
+	author: `${author}`,
+	result: data.result
+	})
+})
+router.get('/news/newsinfo', async (req, res, next) => {
+	let data = await fetchJson(`https://api.lolhuman.xyz/api/newsinfo?apikey=gatadios`)
 	res.json({
 	status: true,
 	author: `${author}`,
